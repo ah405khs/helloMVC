@@ -6,6 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
-<body>this is help page
+<body>
+
+<p> ID:${ID } login fail this is error page</p>
+
+<p><a href=/helloMVC/index.jsp>try home</a></p>
+
 </body>
 </html>

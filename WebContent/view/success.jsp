@@ -13,18 +13,9 @@
 		<li>ID: ${customer.id}</li>
 		<li>Name: ${customer.name}</li>
 		<li>Email: ${customer.email}</li>
+	
 	</ul>
-
-	<%-- JSTL --%>
-	<table style="border: 1px solid red; padding: 10px;">
-		<c:forEach var="customer" items="${customerList }">
-			<tr>
-				<td>${customer.id }</td>
-				<td>${customer.name }</td>
-				<td>${customer.email }</td>
-			</tr>
-		</c:forEach>
-	</table>
-
+	<p>login success</p>
+	<p><a href=/helloMVC/index.jsp>try home</a></p>
 </body>
 </html>

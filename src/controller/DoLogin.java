@@ -3,9 +3,6 @@ package controller;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,35 +28,30 @@ public class DoLogin extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//perform business logic. return a bean as a result
-		String customerID = request.getParameter("customerID");
-		CustomerService service = new CustomerService();
-		Customer customer = service.findCustomer(customerID);
-		request.setAttribute("customer", customer);
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userID =request.getParameter("id");
+		String password = request.getParameter("password");
 		
-		//we can iterate over lists using foreach ing JSTL
-		List<Customer> customers =new ArrayList<>();
-		customers.add(new Customer("id006", "kim", "ah405khs@naver.com"));
-		customers.add(new Customer("id007", "kim", "ah405khs@naver.com"));
-		customers.add(new Customer("id008", "kim", "ah405khs@naver.com"));
-		request.setAttribute("customerList", customers);
-		
-		
+		CustomerService service = (CustomerService) CustomerService.getInstance();
+		Customer customer = service.loginUser(userID, password);
 		
 		String page = null;
+
+		if(customer == null){
+			page = "/view/loginError.jsp";
+			request.setAttribute("ID", userID);
 		
-		if(customer == null)
-			page = "/view/error.jsp";
-		else
+		}
+		else{
+			
 			page ="/view/success.jsp";
-		
+			request.setAttribute("customer", customer);
+			
+		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);
 		
 	}
-
 }
